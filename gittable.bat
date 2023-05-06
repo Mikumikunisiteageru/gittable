@@ -1,2 +1,2 @@
 @echo off
-python gittable.py %*
+python %~dp0\gittable.py %*
