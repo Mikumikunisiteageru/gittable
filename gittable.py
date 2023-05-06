@@ -1,11 +1,12 @@
 # gittable.py
 
+import codecs
 import os
 import shutil
 import sys
 import pandas as pd
 
-VERSION = "0.0.1"
+VERSION = "0.0.2"
 
 def encode_string(string, zip=True):
     new_string = string.replace("^", "^^")
@@ -32,9 +33,12 @@ def push_in(filename):
     os.mkdir(subdir)
     tables = pd.read_excel(io=filename, dtype=str, sheet_name=None)
     for (i, sheet) in enumerate(tables.keys()):
-        print(i, sheet)
-        tables[sheet].to_csv(os.path.join(subdir, f"{i+1}_{sheet}.tsv"), 
-            sep='\t', index=False, line_terminator='\n')
+        table = tables[sheet]
+        out_file = os.path.join(subdir, f"{i+1}_{sheet}.txt")
+        with codecs.open(out_file, "w", "utf-8") as fout:
+            print(*table.shape, sep='\n', end='\n', file=fout)
+        table.to_csv(out_file, sep='\n', line_terminator='\n', mode="a", 
+            header=False, index=False)
 
 def run_git(command):
     if not os.path.isdir(".gittable"):

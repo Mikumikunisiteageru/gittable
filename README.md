@@ -4,7 +4,7 @@ Previously I drafted a small tool [`gittar`](https://github.com/Mikumikunisiteag
 
 It seemed that Microsoft Excel registers all cell values (distinct? probably not) as a list (xl/sharedStrings.xml), and then cite these values by their pointers in actual tables (e.g. xl/worksheets/sheet1.xml). When the content of one single cell is altered, the list may be rearranged and hence the pointers, and may further affect thousands on lines referring to them --- for git there will be a lot of work to do.
 
-Another way to present the Excel sheets to git is to export the data as tab-separated tables in plain text --- as if the sheets are copied from Excel and pasted into plain text environments. By doing so, all the local insertions, modifications, and deletions based on rows remain local in plain text, although all styles, formats, and formulae are lost after the conversion.
+Another way to present the Excel sheets to git is to export the data as a plain text vector --- as if the sheets are copied from Excel and pasted into plain text environments. By doing so, all the local insertions, modifications, and deletions remain local in plain text, although all styles, formats, and formulae are lost after the conversion.
 
 Here I write `gittable` implement the idea above, which converts the sheets in a Excel file into plain text without any style before sending them to git.
 
