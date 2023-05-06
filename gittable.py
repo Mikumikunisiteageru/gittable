@@ -1,6 +1,5 @@
 # gittable.py
 
-import codecs
 import os
 import shutil
 import sys
