@@ -37,7 +37,7 @@ def push_in(filename):
         out_file = os.path.join(subdir, f"{i+1}_{sheet}.txt")
         with codecs.open(out_file, "w", "utf-8") as fout:
             print(*table.shape, sep='\n', end='\n', file=fout)
-        table.to_csv(out_file, sep='\n', line_terminator='\n', mode="a", 
+        table.to_csv(out_file, sep='\n', lineterminator='\n', mode="a", 
             header=False, index=False)
 
 def run_git(command):
